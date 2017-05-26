@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Start-page Prototype</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+<style type="text/css">
+* {}
+body {
+  font-family: 'Lato', sans-serif;  /* 'Roboto' */
+  font-size: 16px;                  /* Check px:em trick */
+  background: #202230; color: #DDDDDD;
+}
+
+#clock { font-size: 96px; font-weight: lighter; }
+#date { font-size: 32px; }
+#clock, #date {
+  text-align: center;
+  margin: 0px auto;
+}
+
+.text-input { width: 60%; margin: 0px auto; }
+input, input:focus {
+  width: 100%; height: 44px;
+  font-size: 18px;
+  margin: 0px auto; padding: 1px 10px;
+  border: 0px; border-radius: 4px;
+  background: #424452; color: #EEEEEE;
+}
+
+/* display:inline-block */
+ul { margin:0px; padding:0px; list-style:none; }
+li { margin:0px; padding:0px; }
+.master { margin-top: 80px; text-align: center; }
+.box-master {
+  display: inline-block;
+  border: 1px dashed #FFFFFF;
+  margin: 0px auto; padding: 10px 10px 20px;
+  /* max-width: 70%; */
+}
+.box {
+  width: 160px;
+  margin: 5px 10px 0px;
+  float: left; /* display: inline-block; */
+}
+.box-title {
+  margin: 0px; padding: 4px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #767275; color: #E8DDD8;
+}
+.box-entry {
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: normal;
+  color: #B6BC9D;
+}
+.box-entry { background-color: #353B49; }
+.box-entry:hover { background-color: #575D6B; }
+.box-entry:nth-child(even) { background-color: #464C5A; }
+.box-entry:nth-child(even):hover { background-color: #686E7C; }
+a { text-decoration: none; color: inherit; }
+
+.box-mini {
+  float: right;
+}
+
+#darksky {
+  background-color: #575D6B; #424452;
+}
+</style>
+</head>
+<body>
+<div class="master">
+  <h1 id="clock"></h1>
+  <h2 id="date"></h2>
+  <br/><br/>
+  <div class="text-input">
+    <input type="text" placeholder="arch + paint alternatve" autofocus=""/>
+  </div>
+  <br/><br/><br/>
+  <ul class="box-master">
+    <li class="box">
+      <h3 class="box-title">Google</h3><ul>
+        <li class="box-entry">
+          <a href="">Gmail<span class="box-mini">[G]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Calendar<span class="box-mini">[Ca]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Voice<span class="box-mini">[V]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Maps<span class="box-mini">[Ma]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Keep<span class="box-mini">[K]</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="box">
+      <h3 class="box-title">Social</h3><ul>
+        <li class="box-entry">
+          <a href="">Tumblr<span class="box-mini">[Tu]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Twitter<span class="box-mini">[Tw]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Reddit<span class="box-mini">[R]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Facebook<span class="box-mini">[F]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">LinkedIn<span class="box-mini">[L]</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="box">
+      <h3 class="box-title">Media</h3><ul>
+        <li class="box-entry">
+          <a href="">YouTube<span class="box-mini">[Y]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Netflix<span class="box-mini">[N]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Amazon Video<span class="box-mini">[Av]</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="box">
+      <h3 class="box-title">Tech</h3><ul>
+        <li class="box-entry">
+          <a href="">Github<span class="box-mini">[Gi]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">AngelList<span class="box-mini">[Al]</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="box">
+      <h3 class="box-title">Misc.</h3><ul>
+        <li class="box-entry">
+          <a href="">XKCD<span class="box-mini">[Xk]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Chase<span class="box-mini">[Ch]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">Meetup<span class="box-mini">[Me]</span></a>
+        </li>
+        <li class="box-entry">
+          <a href="">MTA.info<span class="box-mini">[Mt]</span></a>
+        </li>
+      </ul>
+    </li>
+  </ul><!--.box-master -->
+  <br/><br/><br/><br/><br/><br/><br/>
+<!--
+<iframe id="darksky" type="text/html" frameborder="0" height="245" width="70%" src="http://forecast.io/embed/#lat=40.713295&lon=-74.006181&name=NYC&units=us"></iframe>
+-->
+</div><!--.master -->
+<script>
+var box = {
+  init: function(){
+    // var el = document.getElementById('box-master');
+    box.update();
+  },
+
+  update: function(){
+    // box.updateWeather();
+    box.updateClock();
+  },
+
+  updateClock: function(){
+    var clock = document.getElementById('clock');
+    var clock2 = document.getElementById('date');
+    var d = new Date();
+    var timeText = d.getHours() + ":" + (d.getMinutes()<10 ? ("0"+d.getMinutes()): d.getMinutes());
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","Dec."];
+    var dateText = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+
+    clock.innerHTML = timeText+"<br/>";
+    clock2.innerHTML = dateText+"<br/>";
+  }
+};
+
+window.onload = box.init;
+//window.setInterval(box.update,5000);
+</script>
+</body>
+<!-- TO-DO:
+1) Fix BOXes so that they do not just float left, but center
+2) ...
+-->
+</html>
