@@ -6,6 +6,29 @@
   <title>Start-page Prototype</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+<script>
+const MY_SEARCH = 'https://www.google.com/search?q=';
+const MY_URLs = [
+  {name: 'Gmail',     key: 'gm', url: 'https://mail.google.com'},
+  {name: 'Calendar',  key: 'ca', url: 'https://calendar.google.com'},
+  {name: 'Voice',     key: 'vo', url: 'https://voice.google.com'},
+  {name: 'Maps',      key: 'ma', url: 'https://maps.google.com'},
+  {name: 'Keep',      key: 'ke', url: 'https://keep.google.com'},
+  {name: 'Tumblr',    key: 'tu', url: 'https://www.tumblr.com'},
+  {name: 'Twitter',   key: 'tw', url: 'https://www.twitter.com'},
+  {name: 'Reddit',    key: 're', url: 'https://www.reddit.com'},
+  {name: 'Facebook',  key: 'fa', url: 'https://www.facebook.com'},
+  {name: 'LinkedIn',  key: 'li', url: 'https://www.linkedin.com'},
+  {name: 'YouTube',   key: 'yo', url: 'https://www.youtube.com'},
+  {name: 'Netflix',   key: 'ne', url: 'https://www.netflix.com'},
+  {name: 'Amazon Video', key: 'av', url: ''},
+  {name: 'GitHub',    key: 'gi', url: 'https://www.github.com'},
+  {name: 'AngelList', key: 'al', url: 'https://www.angellist.com'},
+  {name: 'XKCD',      key: 'xk', url: 'https://www.xkcd.com'},
+  {name: 'Meetup',    key: 'me', url: 'https://www.meetup.com'},
+  {name: 'MTA.info',  key: 'mt', url: 'https://www.mta.info'}
+];
+</script>
 <style type="text/css">
 * {}
 body {
@@ -14,15 +37,16 @@ body {
   background: #202230; color: #DDDDDD;
 }
 
-#clock { font-size: 96px; font-weight: lighter; }
-#date { font-size: 32px; }
-#clock, #date {
+#clock-js, #date-js {
   text-align: center;
+  font-weight: lighter;
   margin: 0px auto;
 }
+#clock-js { font-size: 96px; }
+#date-js { font-size: 32px; }
 
-.text-input { width: 60%; margin: 0px auto; }
-input, input:focus {
+#search-form { width: 40%; margin: 0px auto; }
+#search-input, #search-input:focus {
   width: 100%; height: 44px;
   font-size: 18px;
   margin: 0px auto; padding: 1px 10px;
@@ -30,9 +54,9 @@ input, input:focus {
   background: #424452; color: #EEEEEE;
 }
 
-/* display:inline-block */
 ul { margin:0px; padding:0px; list-style:none; }
 li { margin:0px; padding:0px; }
+a { text-decoration: none; color: inherit; }
 .master { margin-top: 80px; text-align: center; }
 .box-master {
   display: inline-block;
@@ -61,11 +85,7 @@ li { margin:0px; padding:0px; }
 .box-entry:hover { background-color: #575D6B; }
 .box-entry:nth-child(even) { background-color: #464C5A; }
 .box-entry:nth-child(even):hover { background-color: #686E7C; }
-a { text-decoration: none; color: inherit; }
-
-.box-mini {
-  float: right;
-}
+.box-mini { float: right; }
 
 #darksky {
   background-color: #575D6B; #424452;
@@ -74,93 +94,55 @@ a { text-decoration: none; color: inherit; }
 </head>
 <body>
 <div class="master">
-  <h1 id="clock"></h1>
-  <h2 id="date"></h2>
-  <br/><br/>
-  <div class="text-input">
-    <input type="text" placeholder="arch + paint alternatve" autofocus=""/>
-  </div>
+  <h1 id="ress"></h1>
+  <h1 id="clock-js"></h1>
+  <h2 id="date-js"></h2>
+  <br/>
+  <form id="search-form" autocomplete="off">
+    <input id="search-input" type="text" placeholder="" autofocus=""/>
+  </form>
   <br/><br/><br/>
   <ul class="box-master">
     <li class="box">
       <h3 class="box-title">Google</h3><ul>
-        <li class="box-entry">
-          <a href="">Gmail<span class="box-mini">[G]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Calendar<span class="box-mini">[Ca]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Voice<span class="box-mini">[V]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Maps<span class="box-mini">[Ma]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Keep<span class="box-mini">[K]</span></a>
-        </li>
+        <li class="box-entry">Gmail<span class="box-mini">[gm]</span></li>
+        <li class="box-entry">Calendar<span class="box-mini">[ca]</span></li>
+        <li class="box-entry">Voice<span class="box-mini">[vo]</span></li>
+        <li class="box-entry">Maps<span class="box-mini">[ma]</span></li>
+        <li class="box-entry">Keep<span class="box-mini">[ke]</span></li>
       </ul>
     </li>
 
     <li class="box">
       <h3 class="box-title">Social</h3><ul>
-        <li class="box-entry">
-          <a href="">Tumblr<span class="box-mini">[Tu]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Twitter<span class="box-mini">[Tw]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Reddit<span class="box-mini">[R]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Facebook<span class="box-mini">[F]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">LinkedIn<span class="box-mini">[L]</span></a>
-        </li>
+        <li class="box-entry">Tumblr<span class="box-mini">[tu]</span></li>
+        <li class="box-entry">Twitter<span class="box-mini">[tw]</span></li>
+        <li class="box-entry">Reddit<span class="box-mini">[re]</span></li>
+        <li class="box-entry">Facebook<span class="box-mini">[fa]</span></li>
+        <li class="box-entry">LinkedIn<span class="box-mini">[li]</span></li>
       </ul>
     </li>
 
     <li class="box">
       <h3 class="box-title">Media</h3><ul>
-        <li class="box-entry">
-          <a href="">YouTube<span class="box-mini">[Y]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Netflix<span class="box-mini">[N]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Amazon Video<span class="box-mini">[Av]</span></a>
-        </li>
+        <li class="box-entry">YouTube<span class="box-mini">[yo]</span></li>
+        <li class="box-entry">Netflix<span class="box-mini">[ne]</span></li>
+        <li class="box-entry">Amazon Video<span class="box-mini">[av]</span></li>
       </ul>
     </li>
 
     <li class="box">
       <h3 class="box-title">Tech</h3><ul>
-        <li class="box-entry">
-          <a href="">Github<span class="box-mini">[Gi]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">AngelList<span class="box-mini">[Al]</span></a>
-        </li>
+        <li class="box-entry">Github<span class="box-mini">[gi]</span></li>
+        <li class="box-entry">AngelList<span class="box-mini">[al]</span></li>
       </ul>
     </li>
 
     <li class="box">
       <h3 class="box-title">Misc.</h3><ul>
-        <li class="box-entry">
-          <a href="">XKCD<span class="box-mini">[Xk]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Chase<span class="box-mini">[Ch]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">Meetup<span class="box-mini">[Me]</span></a>
-        </li>
-        <li class="box-entry">
-          <a href="">MTA.info<span class="box-mini">[Mt]</span></a>
-        </li>
+        <li class="box-entry">XKCD<span class="box-mini">[xk]</span></li>
+        <li class="box-entry">Meetup<span class="box-mini">[me]</span></li>
+        <li class="box-entry">MTA.info<span class="box-mini">[mt]</span></li>
       </ul>
     </li>
   </ul><!--.box-master -->
@@ -169,38 +151,79 @@ a { text-decoration: none; color: inherit; }
 <iframe id="darksky" type="text/html" frameborder="0" height="245" width="70%" src="http://forecast.io/embed/#lat=40.713295&lon=-74.006181&name=NYC&units=us"></iframe>
 -->
 </div><!--.master -->
+
+<!-- Shoutouts to... -->
+<div style="display: none; text-align: right; font-size: 8px;">
+Inspiration and thanks to 
+<b><a href="https://cadejs.com">Cade Scroggins</a></b>'s Tilde and 
+<b><a href="http://nampnq.vietnamcode.info">NamPNQ</a></b>'s version.
+</div>
+
+</body>
 <script>
-var box = {
-  init: function(){
-    // var el = document.getElementById('box-master');
-    box.update();
-  },
+class Time_n_Date {
+  constructor() {
+    this._clockElm = document.getElementById('clock-js');
+    this._dateElm = document.getElementById('date-js');
+    this._setText = this._setText.bind(this);
+    this._initiate();
+  }
 
-  update: function(){
-    // box.updateWeather();
-    box.updateClock();
-  },
+  _setText() {
+    let date = new Date();
 
-  updateClock: function(){
-    var clock = document.getElementById('clock');
-    var clock2 = document.getElementById('date');
-    var d = new Date();
-    var timeText = d.getHours() + ":" + (d.getMinutes()<10 ? ("0"+d.getMinutes()): d.getMinutes());
-    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    var months = ["January","February","March","April","May","June","July","August","September","October","November","Dec."];
-    var dateText = days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
+    let minutes = date.getMinutes();
+    let clockText = date.getHours() + ":" + (minutes<10 ? ("0"+minutes) : minutes);
 
-    clock.innerHTML = timeText+"<br/>";
-    clock2.innerHTML = dateText+"<br/>";
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let dateText = days[date.getDay()] + ", " + date.getDate() + " " + months[date.getMonth()] + " " + date.getFullYear();
+
+    this._clockElm.innerHTML = clockText;
+    this._dateElm.innerHTML = dateText;
+  }
+  
+  _initiate() {
+    this._setText();
+    setInterval(this._setText, 1000);
   }
 };
 
-window.onload = box.init;
-//window.setInterval(box.update,5000);
+class Form_Search {
+  constructor() {
+    this._formElm = document.getElementById('search-form');
+    this._inputElm = document.getElementById('search-input');
+    this._res = document.getElementById('ress');
+    
+    this._submitValue = this._submitValue.bind(this);
+    this._kp = this._kp.bind(this);
+    
+    this._formElm.addEventListener('keypress', this._kp,false);
+    this._formElm.addEventListener('submit',this._submitValue,false);
+  }
+  
+  _submitValue(event) {
+    if (event) { event.preventDefault(); }
+    let query = this._inputElm.value.trim();
+    
+    if (!query) { this._res.innerHTML = ""; return; }
+    let urls = MY_URLs.filter(function(val){return val.key === query;});
+    if (urls.length === 0) {
+      window.open(MY_SEARCH+query,'_blank');
+    } else {
+      window.open(urls[0].url,'_blank');
+    }
+    
+  }
+};
+
+const clock_date = new Time_n_Date();
+const form_search = new Form_Search();
 </script>
-</body>
 <!-- TO-DO:
 1) Fix BOXes so that they do not just float left, but center
-2) ...
+2) Add Gmail/etc. counters
+3) Make search of url better
+4) Make boxes from MY_URLs
 -->
 </html>
