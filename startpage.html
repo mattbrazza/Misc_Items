@@ -196,7 +196,6 @@ class Form_Search {
     this._res = document.getElementById('ress');
     
     this._submitValue = this._submitValue.bind(this);
-    this._kp = this._kp.bind(this);
     
     this._formElm.addEventListener('keypress', this._kp,false);
     this._formElm.addEventListener('submit',this._submitValue,false);
@@ -214,6 +213,7 @@ class Form_Search {
       window.open(urls[0].url,'_blank');
     }
     
+    this._inputElm.value = "";
   }
 };
 
