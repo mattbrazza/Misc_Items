@@ -1,0 +1,318 @@
+# i3 config file (v4)
+# Reference: https://i3wm.org/docs/userguide.html
+# rev. 15 Dec. 2018 - i3-gaps, i3blocks, i3status, etc.
+
+###################################################
+#                 GENERAL                         #
+###################################################
+set $mod Mod4
+
+set $i3term st
+set $browser chromium
+set $browserPrivate chromium --incognito
+#set $browser firefox
+#set $browserPrivate firefox --private-window
+set $startpage $HOME/.config/my_homepage/startpage.html
+set $wallpaper $HOME/Media/wallpaper
+
+# key bindings
+bindsym $mod+Return exec $i3term
+bindsym $mod+grave exec create_float "floater_grave"
+bindsym $mod+Shift+Return exec $browserPrivate
+bindsym $mod+Shift+o exec $browser --new-window $startpage
+bindsym $mod+Shift+q kill
+bindsym $mod+o exec dmenu_myprogs
+bindsym $mod+d exec dmenu_run -i -nb rgb:00/00/00 -nf rgb:ff/63/47 -fn "System San Fransisco Display:pixelsize=14"
+#bindsym $mod+Shift+Delete exec ~/.config/i3/my_i3lock.sh
+bindsym $mod+Shift+Delete exec xautolock -locknow
+bindsym $mod+Shift+Escape exec xautolock -locknow
+bindsym $mod+Print exec scrot -z '/home/mbrazza/%Y-%m-%d_%H-%M-%S.png'
+#bindsym $mod+Shift+Print exec flameshot gui -p '/home/mbrazza'
+
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
+bindsym --release XF86AudioMute exec pkill -SIGRTMIN+20 i3blocks
+bindsym --release XF86AudioRaiseVolume exec pkill -SIGRTMIN+20 i3blocks
+bindsym --release XF86AudioLowerVolume exec pkill -SIGRTMIN+20 i3blocks
+
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+###################################################
+#                 STYLING                         #
+###################################################
+font pango:Hack 9
+#font pango:Hack, Noto Sans CJK JP 9
+exec_always --no-startup-id feh --bg-scale $wallpaper
+
+default_border pixel 3
+default_floating_border pixel 10
+gaps outer 2
+gaps inner 8
+smart_gaps on     # on|inverse_outer
+#smart_borders on  # on|no_gaps
+#hide_edge_borders smart #smart_no_gaps
+bindsym $mod+g gaps inner current plus 1
+bindsym $mod+Shift+g gaps inner current minus 1
+bindsym $mod+Ctrl+g gaps inner current set 7
+
+#set_from_resources $ i3wm.foreground  #
+#set_from_resources $ i3wm.background  #
+#set_from_resources $ i3wm.color0  #
+#set_from_resources $ i3wm.color1  #
+#set_from_resources $ i3wm.color2  #
+#set_from_resources $ i3wm.color3  #
+#set_from_resources $ i3wm.color4  #
+#set_from_resources $ i3wm.color5  #
+#set_from_resources $ i3wm.color6  #
+#set_from_resources $ i3wm.color7  #
+#set_from_resources $ i3wm.color8  #
+#set_from_resources $ i3wm.color9  #
+#set_from_resources $ i3wm.color10 #
+#set_from_resources $ i3wm.color11 #
+#set_from_resources $ i3wm.color12 #
+#set_from_resources $ i3wm.color13 #
+#set_from_resources $ i3wm.color14 #
+#set_from_resources $ i3wm.color15 #
+
+#set $bg-color           #2f343f
+#set $inact-bg-color     #2f343f
+#set $text-color         #f3f4f5
+#set $inact-text-color   #676e7d
+#set $urg-bg-color       #ef3935
+
+# Property Name         Border          Background      Text                Indicator   Child-Border
+#client.focused          #00FF00   $bg-color       $text-color         #00ff00
+#client.focused_inactive #00FF00   $inact-bg-color $inact-text-color   #00ff00
+#client.unfocused        #00FF00   $inact-bg-color $inact-text-color   #00ff00
+#client.urgent           #00FF00   $urg-bg-color   $text-color         #00ff00
+#client.placeholder                     #0c0c0c         #ffffff                         #0c0c0c
+
+# class                 border  backgr. text    indicator child_border
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+#client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+#client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+#client.urgent           #2f343a #900000 #ffffff #900000   #900000
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+#client.background       #ffffff
+
+## Random cute theme ?? ##
+#client.focused          #F1C48B #F1C48B #6B4958 #8FC2F6   #F1C48B
+#client.focused_inactive #8FC2F6 #8FC2F6 #6B4958 #F1C48B   #C0505E
+#client.unfocused        #8FC2F6 #8FC2F6 #6B4958 #F1C48B   #8FC2F6
+#client.urgent           #C0505E #C0505E #FFFFFF #8FC2F6   #C0505E
+#client.placeholder      #000000 #0C0C0C #6B4958 #000000   #0C0C0C
+#client.background       #6B4958
+#bar {
+#  status_command i3status
+#  strip_workspace_numbers yes
+#  colors {
+#    background #4F4B5E
+#    statusline #FFFFFF
+#    separator  #666666
+#    focused_workspace  #8FC2F6 #8FC2F6 #6B4958
+#    active_workspace   #F1C48B #F1C48B #6B4958
+#    inactive_workspace #4F4B5E #4F4B5E #FFFFFF
+#    urgent_workspace   #C0505E #C0505E #FFFFFF
+#    binding_mode       #F1C48B #C0505E #FFFFFF
+#  }
+#}
+
+###################################################
+#           FLOAT / BORDER / SCRATCH              #
+###################################################
+floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+s sticky toggle
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+#for_window [class="^.*"] border pixel 1
+for_window [class="firefox"] border none
+for_window [class="Chromium"] border none
+#for_window [class="vlc"] floating enable, border pixel 4
+for_window [class="XCalc"] floating enable, border pixel 4, move position center
+#for_window [class="mate-calc"] floating enable, sticky enable
+for_window [class="Zathura"] border normal
+for_window [class="Lxappearance"] floating enable
+for_window [title="alsamixer"] floating enable, border pixel 4, resize set 1100 600, move position 20 20
+for_window [title="floater_*"] floating enable, border pixel 6, resize set 500 640, move position 800 40
+for_window [window_role="pop-up"] floating enable, border normal, resize set 800 400
+
+###################################################
+#               WORKSPACE                         #
+###################################################
+workspace_auto_back_and_forth no
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+
+# Define workspaces and use variables
+set $ws1 "1:一"
+set $ws2 "2:二"
+set $ws3 "3:三"
+set $ws4 "4:四"
+set $ws5 "5:五"
+set $ws6 "6:六"
+set $ws7 "7:七"
+set $ws8 "8:八"
+set $ws9 "9:九"
+set $ws10 "10:十"
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# move entire workspaces to different monitor
+bindsym $mod+Shift+less move workspace to output up
+bindsym $mod+Shift+greater move workspace to output down
+
+###################################################
+#                FOCUSING                         #
+###################################################
+bindsym $mod+space focus mode_toggle
+bindsym $mod+p focus parent
+bindsym $mod+Shift+p focus child
+
+focus_follows_mouse no
+focus_on_window_activation urgent
+force_display_urgency_hint 500 ms
+popup_during_fullscreen smart
+#focus_wrapping yes
+#mouse_warping none
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+###################################################
+#                RESIZING                         #
+###################################################
+bindsym $mod+r mode "resize"
+mode "resize" {
+    # window resizing with arrows/vim keys
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # finer window resizing with Mod key
+    bindsym $mod+j resize shrink width 5 px or 5 ppt
+    bindsym $mod+k resize grow height 5 px or 5 ppt
+    bindsym $mod+l resize shrink height 5 px or 5 ppt
+    bindsym $mod+semicolon resize grow width 5 px or 5 ppt
+    bindsym $mod+Left resize shrink width 5 px or 5 ppt
+    bindsym $mod+Down resize grow height 5 px or 5 ppt
+    bindsym $mod+Up resize shrink height 5 px or 5 ppt
+    bindsym $mod+Right resize grow width 5 px or 5 ppt
+
+    # finest window resizing with Mod+Shift key
+    bindsym $mod+Shift+j resize shrink width 1 px or 1 ppt
+    bindsym $mod+Shift+k resize grow height 1 px or 1 ppt
+    bindsym $mod+Shift+l resize shrink height 1 px or 1 ppt
+    bindsym $mod+Shift+semicolon resize grow width 1 px or 1 ppt
+    bindsym $mod+Shift+Left resize shrink width 1 px or 1 ppt
+    bindsym $mod+Shift+Down resize grow height 1 px or 1 ppt
+    bindsym $mod+Shift+Up resize shrink height 1 px or 1 ppt
+    bindsym $mod+Shift+Right resize grow width 1 px or 1 ppt
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+###################################################
+#                 STATUS BAR                      #
+###################################################
+bar {
+    status_command i3blocks -c $HOME/.config/i3/my_i3blocks.conf
+    position top
+#    output primary
+    tray_output primary
+    tray_padding 0
+
+    font pango:Hack, Noto Sans CJK JP 9
+#    font -monotype-noto sans-medium-r-normal--------iso10646-1
+    separator_symbol "|"
+    strip_workspace_numbers yes
+    colors {
+        background #2d2d2d
+        statusline #e5c6aa
+        separator #757575
+
+        # <colorclass>        <border>      <background>    <text>
+       # focused_workspace    #4c7899       #285577         #ffffff
+       # active_workspace     #333333       #5f676a         #ffffff
+       # inactive_workspace   #333333       #222222         #888888
+       # urgent_workspace     #2f343a       #900000         #ffffff
+       # binding_mode         #2f343a       #900000         #ffffff
+    }
+
+    bindsym button4 nop #no scroll thru wkspc
+    bindsym button5 nop #no scroll thru wkspc
+}
+
+###################################################
+#                XF86-KEYS                        #
+###################################################
+# brightness key bindings
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym $mod+XF86MonBrightnessUp exec xbacklight -inc 3
+bindsym $mod+XF86MonBrightnessDown exec xbacklight -dec 3
+bindsym $mod+Shift+XF86MonBrightnessUp exec xbacklight -inc 1
+bindsym $mod+Shift+XF86MonBrightnessDown exec xbacklight -dec 1
+# volume key bindings
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2%
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2%
+bindsym $mod+Shift+XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +1%
+bindsym $mod+Shift+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -1%
+
+# vim:filetype=i3
+
